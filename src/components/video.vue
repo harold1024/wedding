@@ -2,7 +2,7 @@
     <div class="section">
         <video id="myVideo" src="cloud://test-9k4zi.7465-test-9k4zi/video/love.mp4" :danmu-list="danmuList" loop enable-danmu danmu-btn controls poster="视频封面地址"></video>
         <div class="btn-area">
-            <input @blur="bindInputBlur" placeholder="请输入临时弹幕，真实弹幕来自留言" placeholder-style="color:#bbb"/>
+            <input v-model="inputValue" @blur="bindInputBlur" placeholder="请输入临时弹幕，真实弹幕来自留言" placeholder-style="color:#bbb"/>
             <button @tap="bindSendDanmu">点击生成临时弹幕</button>
             <image src="../../static/images/close1.png" @tap="close"/>
         </div>
@@ -27,8 +27,9 @@ export default {
 
   methods: {
     bindInputBlur (e) {
-      let that = this
-      that.inputValue = e.mp.detail.value
+      // let that = this
+      // that.inputValue = e.mp.detail.value
+      // console.log(this.aaa)
     },
 
     bindSendDanmu: function () {
