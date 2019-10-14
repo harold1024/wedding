@@ -1,6 +1,6 @@
 <template>
     <div class="section">
-        <video id="myVideo" src="cloud://test-9k4zi.7465-test-9k4zi/video/love.mp4" :danmu-list="danmuList" enable-danmu danmu-btn controls poster="视频封面地址"></video>
+        <video id="myVideo" src="cloud://test-9k4zi.7465-test-9k4zi/video/love.mp4" :danmu-list="danmuList" loop enable-danmu danmu-btn controls poster="视频封面地址"></video>
         <div class="btn-area">
             <input @blur="bindInputBlur" placeholder="请输入临时弹幕，真实弹幕来自留言" placeholder-style="color:#bbb"/>
             <button @tap="bindSendDanmu">点击生成临时弹幕</button>
@@ -37,6 +37,7 @@ export default {
         text: that.inputValue,
         color: that.getRandomColor()
       })
+      that.inputValue = ''
     },
 
     getRandomColor () {

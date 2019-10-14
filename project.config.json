@@ -7,7 +7,7 @@
 		"minified": true,
 		"newFeature": true,
 		"autoAudits": false,
-		"checkSiteMap":false
+		"checkSiteMap": false
 	},
 	"miniprogramRoot": "dist/wx/",
 	"compileType": "miniprogram",
