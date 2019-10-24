@@ -21,7 +21,7 @@
                 <p>谨定于 2020年3月1日 （星期日）中午12:00</p>
                 <p>农历 二月初八 中午十二点整 举办婚礼</p>
                 <p>席设：沈北新区</p>
-                <p>席设：沈北新区</p>
+                <p>地址：沈北新区</p>
                 <image src="../../static/images/we.png" class="img_footer"/>
             </div>
         </div>
