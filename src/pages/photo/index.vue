@@ -41,10 +41,10 @@ export default {
       //   fail: console.error
       // })
       wx.cloud.callFunction({
-        name: 'sweetImg',
+        name: 'photoList',
         data: {}
       }).then(res => {
-        console.log(res.result)
+        // console.log(res.result)
         that.list = res.result
       })
     }
