@@ -48,7 +48,7 @@ export default {
     that.audioCtx = wx.createInnerAudioContext()
     this.audioCtx.autoplay = true
     this.audioCtx.loop = true
-    this.audioCtx.src = 'cloud://test-9k4zi.7465-test-9k4zi/music/marry.mp3'
+    this.audioCtx.src = 'cloud://test-9k4zi.7465-test-9k4zi/music/Panama.mp3'
     that.isPlay = true
     that.getList()
   },
