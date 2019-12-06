@@ -18,10 +18,10 @@
           <div @tap="getClick">点击获取</div> -->
             <div class="content">
                 <h1>赵鹏磊先生 & 邱岩女士</h1>
-                <p>谨定于 2020年3月1日 （星期日）中午12:00</p>
-                <p>农历 二月初八 中午十二点整 举办婚礼</p>
-                <p>席设：沈北新区</p>
-                <p>地址：沈北新区</p>
+                <p>谨定于 2020年3月1日 （星期日）中午11.08</p>
+                <p>农历 二月初八 中午十一时零八分钟 举办婚礼</p>
+                <p>席设：福临门大酒店</p>
+                <p>地址：沈北新区道义南大街28-4号</p>
                 <image src="../../static/images/we.png" class="img_footer"/>
             </div>
         </div>
@@ -48,7 +48,7 @@ export default {
     that.audioCtx = wx.createInnerAudioContext()
     this.audioCtx.autoplay = true
     this.audioCtx.loop = true
-    this.audioCtx.src = 'cloud://test-9k4zi.7465-test-9k4zi/music/Panama.mp3'
+    this.audioCtx.src = 'cloud://test-9k4zi.7465-test-9k4zi/music/loveYou.mp3'
     that.isPlay = true
     that.getList()
   },
