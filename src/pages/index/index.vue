@@ -14,14 +14,12 @@
         </div>
         
         <div class="info" :animation="animationData">
-          <!-- <div @tap="addClick">点击插入</div>
-          <div @tap="getClick">点击获取</div> -->
             <div class="content">
                 <h1>赵鹏磊先生 & 邱岩女士</h1>
-                <p>谨定于 2020年3月1日 （星期日）中午11.08</p>
+                <p>谨定于 2020年3月1日 （星期日）中午11:08</p>
                 <p>农历 二月初八 中午十一时零八分钟 举办婚礼</p>
                 <p>席设：福临门大酒店</p>
-                <p>地址：沈北新区道义南大街28-4号</p>
+                <p>地址：沈阳市沈北新区道义南大街28-4号</p>
                 <image src="../../static/images/we.png" class="img_footer"/>
             </div>
         </div>
@@ -38,43 +36,24 @@ export default {
   },
   data () {
     return {
-      isPlay: true,
+      isPlay: false,
       list: [],
       audioCtx: ''
     }
   },
   onShow () {
     const that = this
-    that.audioCtx = wx.createInnerAudioContext()
-    this.audioCtx.autoplay = true
-    this.audioCtx.loop = true
-    this.audioCtx.src = 'cloud://test-9k4zi.7465-test-9k4zi/music/loveYou.mp3'
-    that.isPlay = true
-    that.getList()
+    if (!that.isPlay) {
+      that.audioCtx = wx.createInnerAudioContext()
+      this.audioCtx.autoplay = true
+      this.audioCtx.loop = true
+      this.audioCtx.src = 'cloud://test-9k4zi.7465-test-9k4zi/music/loveYou.mp3'
+      that.isPlay = true
+      that.getList()
+      // console.log(that.audioCtx)
+    }
   },
-
   methods: {
-    // addClick () {
-    //   console.log('000')
-    //   // const that = this
-    //   const db = wx.cloud.database()
-    //   const todos = db.collection('todos')
-    //   todos.add({
-    //     // data 字段表示需新增的 JSON 数据
-    //     data: {
-    //       description: 'learn cloud database',
-    //       due: new Date('2018-09-01'),
-    //       tags: ['cloud',
-    //         'database'
-    //       ],
-    //       location: new db.Geo.Point(113, 23),
-    //       done: false
-    //     }
-    //   }).then(res => {
-    //     // that.list = res.data[0].bannerList
-    //     console.log(res)
-    //   })
-    // },
     audioPlay () {
       const that = this
       if (that.isPlay) {
@@ -90,18 +69,10 @@ export default {
 
     getList () {
       const that = this
-      // const db = wx.cloud.database()
-      // const banner = db.collection('banner')
-      // banner.get().then(res => {
-      //   that.list = res.data[0].bannerList
-      //   console.log(that.list)
-      // })
-      // const that = this
       wx.cloud.callFunction({
         name: 'sweetImg',
         data: {}
       }).then(res => {
-        // console.log(res.result)
         that.list = res.result
       })
     }

@@ -7,7 +7,7 @@
         >
             <p class="place"></p>
             <div class="item" v-for="(item, index) in messageList" :key="index">
-                <image class="left" :src="item.url"/>
+                <image :if='item.url' class="left" :src="item.url"/>
                 <div class="right">
                     <div class="top">
                         <span class="top-l">{{item.name}}</span>
@@ -29,10 +29,10 @@
                 <button class="right" @tap="cancel">取消</button>
             </div>
         </div>
-        <div class="video-dialog" @tap="toVideo">
+        <!-- <div class="video-dialog" @tap="toVideo">
             <image src="../../static/images/video1.png"/>
-        </div>
-        <div class="form-dialog" @tap="lookList">
+        </div> -->
+        <div class="form-dialog" @tap="lookList" v-if="this.showUser == '嗨，你好 ~'">
             <image src="../../static/images/form.png"/>
         </div>
         <div class="video" v-show="isVideo">
@@ -69,11 +69,19 @@ export default {
       isForm: false,
       isVideo: false,
       isFormlist: false,
-      formList: []
+      formList: [],
+      showUser: ''
     }
   },
   onShow () {
     const that = this
+    wx.getUserInfo({
+      success: function (res) {
+        that.showUser = res.userInfo.nickName
+        // console.log("名字:'" + that.showUser + "'")
+      }
+    })
+    // console.log(this.userInfo)
     that.isVideo = false
     that.isForm = false
     that.isFormlist = false
