@@ -32,18 +32,18 @@
         <!-- <div class="video-dialog" @tap="toVideo">
             <image src="../../static/images/video1.png"/>
         </div> -->
-        <div class="form-dialog" @tap="lookList" v-if="this.showUser == '嗨，你好 ~'">
-            <image src="../../static/images/form.png"/>
-        </div>
-        <div class="video" v-show="isVideo">
+        <!-- <div class="form-dialog" @tap="lookList" v-if="this.showUser == '嗨，你好 ~'">
+            <image src="/static/images/form.png"/>
+        </div> -->
+        <!-- <div class="video" v-show="isVideo">
             <h-video @closeVideo="closeVideo"></h-video>
-        </div>
+        </div> -->
         <div class="form" v-show="isForm">
             <h-form @closeForm="closeForm" @getFromlist="getFromlist"></h-form>
         </div>
-        <div class="form-list" v-show="isFormlist">
+        <!-- <div class="form-list" v-show="isFormlist">
             <h-formlist @closeFormlist="closeFormlist" :formList="formList"></h-formlist>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -108,23 +108,36 @@ export default {
       that.isOpen = false
     },
 
+    // 留言评论
     sendMessage () {
       const that = this
       if (that.desc) {
-        const db = wx.cloud.database()
-        const message = db.collection('message')
-        message.add({
-          data: {
-            desc: that.desc,
-            type: 'message',
-            time: that.getNowFormatDate(),
-            url: that.userInfo.avatarUrl,
-            name: that.userInfo.nickName
-          }
+        wx.cloud.callFunction({
+          name: 'msgSecCheck',
+          data: ({
+            text: that.desc
+          })
         }).then(res => {
-          that.isOpen = false
-          that.desc = ''
-          that.getMessageList()
+          // console.log(res.result.errMsg)
+          if (res.result.errMsg === 'openapi.security.msgSecCheck:ok') {
+            const db = wx.cloud.database()
+            const message = db.collection('message')
+            message.add({
+              data: {
+                desc: that.desc,
+                type: 'message',
+                time: that.getNowFormatDate(),
+                url: that.userInfo.avatarUrl,
+                name: that.userInfo.nickName
+              }
+            }).then(res => {
+              that.isOpen = false
+              that.desc = ''
+              that.getMessageList()
+            })
+          } else {
+            tools.showToast('您输入的内容可能存在色情,违法等有害信息')
+          }
         })
       } else {
         tools.showToast('说点什么吧~')
