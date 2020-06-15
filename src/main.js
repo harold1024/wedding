@@ -5,7 +5,7 @@ Vue.config.productionTip = false
 App.mpType = 'app'
 
 wx.cloud.init({
-  env: 'test-9k4zi',
+  env: 'test-bhtyu',
   traceUser: true
 })
 

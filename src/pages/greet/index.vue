@@ -91,7 +91,7 @@ export default {
         name: 'userList',
         data: {}
       }).then(res => {
-        // console.log(res)
+        console.log(res)
         that.userList = res.result.data.reverse()
       })
     }
