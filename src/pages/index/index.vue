@@ -73,6 +73,7 @@ export default {
         name: 'sweetImg',
         data: {}
       }).then(res => {
+        console.log(res.result)
         that.list = res.result
       })
     }
