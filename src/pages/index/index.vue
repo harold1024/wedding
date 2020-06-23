@@ -1,7 +1,8 @@
 <template>
     <div class="index">
         <div class="bg-swiper">
-            <index-swiper :list="list"></index-swiper>
+            <!-- <index-swiper :list="list"></index-swiper> -->
+            <image :src="list.fileID" class="" />
         </div>
         <image class="inv" src="../../static/images/inv.png"/>
         <div class="bg_music" v-if="isPlay" @tap="audioPlay">
@@ -43,16 +44,17 @@ export default {
   },
   onShow () {
     const that = this
-    if (!that.isPlay) {
-      that.audioCtx = wx.createInnerAudioContext()
-      this.audioCtx.autoplay = true
-      this.audioCtx.loop = true
-      this.audioCtx.src = 'cloud://test-bhtyu.7465-test-bhtyu-1300389118/music/loveYou.mp3'
-      that.isPlay = true
-      that.getList()
-      // that.getListaaa()
-      // console.log(that.audioCtx)
-    }
+    that.getList()
+    // if (!that.isPlay) {
+    //   that.audioCtx = wx.createInnerAudioContext()
+    //   this.audioCtx.autoplay = true
+    //   this.audioCtx.loop = true
+    //   this.audioCtx.src = 'cloud://test-bhtyu.7465-test-bhtyu-1300389118/music/loveYou.mp3'
+    //   that.isPlay = true
+    //   // that.getList()
+    //   // that.getListaaa()
+    //   // console.log(that.audioCtx)
+    // }
   },
   methods: {
     audioPlay () {
@@ -75,7 +77,7 @@ export default {
         data: {}
       }).then(res => {
         console.log(res.result)
-        that.list = res.result
+        that.list = res.result[0]
       })
     },
 
