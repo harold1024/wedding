@@ -31,6 +31,7 @@ export default {
       // const banner = db.collection('indexBanner')
       // banner.get().then(res => {
       //   that.list = res.data[0].indexBanner
+      //   console.log(res.data[0].indexBanner)
       // })
       // wx.cloud.downloadFile({
       //   fileID: ['cloud://test-9k4zi.7465-test-9k4zi-1300389118/phptpBanner/0.jpg'],
@@ -44,8 +45,8 @@ export default {
         name: 'photoList',
         data: {}
       }).then(res => {
-        console.log(res.result)
         that.list = res.result
+        console.log(that.list)
       })
     }
   }

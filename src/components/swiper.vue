@@ -8,7 +8,7 @@
         >
             <block v-for="(item, index) in list" :key="index">
                 <swiper-item class="item">
-                    <image mode="aspectFill" lazy-load="true" :src="item.tempFileURL" class="slide-image"/>
+                    <image mode="aspectFill" lazy-load="true" :src="item.fileID" class="slide-image"/>
                 </swiper-item>
             </block>
         </swiper>

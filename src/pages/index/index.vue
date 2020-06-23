@@ -47,9 +47,10 @@ export default {
       that.audioCtx = wx.createInnerAudioContext()
       this.audioCtx.autoplay = true
       this.audioCtx.loop = true
-      this.audioCtx.src = 'cloud://test-9k4zi.7465-test-9k4zi/music/loveYou.mp3'
+      this.audioCtx.src = 'cloud://test-bhtyu.7465-test-bhtyu-1300389118/music/loveYou.mp3'
       that.isPlay = true
       that.getList()
+      // that.getListaaa()
       // console.log(that.audioCtx)
     }
   },
@@ -75,6 +76,16 @@ export default {
       }).then(res => {
         console.log(res.result)
         that.list = res.result
+      })
+    },
+
+    getListaaa () {
+      // const that = this
+      const db = wx.cloud.database()
+      const banner = db.collection('banner')
+      banner.get().then(res => {
+        console.log(res.data)
+        // that.list = res.data[0].bannerList
       })
     }
   },
