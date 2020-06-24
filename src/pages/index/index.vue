@@ -2,7 +2,7 @@
     <div class="index">
         <div class="bg-swiper">
             <!-- <index-swiper :list="list"></index-swiper> -->
-            <image :src="list.fileID" class="" />
+            <image src="http://cdn.wenlong.ink/marry/frist.jpg" class="indexImg" />
         </div>
         <image class="inv" src="../../static/images/inv.png"/>
         <div class="bg_music" v-if="isPlay" @tap="audioPlay">
@@ -17,7 +17,7 @@
         <div class="info" :animation="animationData">
             <div class="content">
                 <h1>赵鹏磊先生 & 邱岩女士</h1>
-                <p>谨定于 2020年7月18日 （星期日）中午11:08</p>
+                <p>谨定于 2020年7月18日 （星期六）中午11:08</p>
                 <p>农历 五月廿八 中午十一时零八分钟 举办婚礼</p>
                 <p>席设：福临门大酒店</p>
                 <p>地址：沈阳市沈北新区道义南大街28-4号</p>
@@ -44,17 +44,14 @@ export default {
   },
   onShow () {
     const that = this
-    that.getList()
-    // if (!that.isPlay) {
-    //   that.audioCtx = wx.createInnerAudioContext()
-    //   this.audioCtx.autoplay = true
-    //   this.audioCtx.loop = true
-    //   this.audioCtx.src = 'cloud://test-bhtyu.7465-test-bhtyu-1300389118/music/loveYou.mp3'
-    //   that.isPlay = true
-    //   // that.getList()
-    //   // that.getListaaa()
-    //   // console.log(that.audioCtx)
-    // }
+    if (!that.isPlay) {
+      that.audioCtx = wx.createInnerAudioContext()
+      this.audioCtx.autoplay = true
+      this.audioCtx.loop = true
+      this.audioCtx.src = 'cloud://test-bhtyu.7465-test-bhtyu-1300389118/music/loveYou.mp3'
+      that.isPlay = true
+      // that.getList()
+    }
   },
   methods: {
     audioPlay () {
@@ -68,28 +65,28 @@ export default {
         that.isPlay = true
         tools.showToast('背景音乐已开启~')
       }
-    },
-
-    getList () {
-      const that = this
-      wx.cloud.callFunction({
-        name: 'sweetImg',
-        data: {}
-      }).then(res => {
-        console.log(res.result)
-        that.list = res.result[0]
-      })
-    },
-
-    getListaaa () {
-      // const that = this
-      const db = wx.cloud.database()
-      const banner = db.collection('banner')
-      banner.get().then(res => {
-        console.log(res.data)
-        // that.list = res.data[0].bannerList
-      })
     }
+
+    // getList () {
+    //   const that = this
+    //   wx.cloud.callFunction({
+    //     name: 'sweetImg',
+    //     data: {}
+    //   }).then(res => {
+    //     console.log(res.result)
+    //     that.list = res.result[0]
+    //   })
+    // },
+
+    // getListaaa () {
+    //   const that = this
+    //   const db = wx.cloud.database()
+    //   const banner = db.collection('banner')
+    //   banner.get().then(res => {
+    //     console.log(res.data)
+    //     that.list = res.data[0].bannerList
+    //   })
+    // }
   },
 
   onShareAppMessage: function (res) {
@@ -130,8 +127,14 @@ export default {
     width 100%
     height 100%
   .bg-swiper
+    position absolute
     width 100%
     height 100%
+    .indexImg
+      position absolute
+      width 100%
+      height 100%
+      object-fit:cover;
   .inv
     position absolute
     top 20rpx
