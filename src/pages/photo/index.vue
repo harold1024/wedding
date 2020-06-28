@@ -46,7 +46,7 @@ export default {
         data: {}
       }).then(res => {
         that.list = res.result
-        console.log(that.list)
+        // console.log(that.list)
       })
     }
   }

@@ -1,5 +1,6 @@
 <template>
-    <div class="message">
+<div>
+   <div class="message" v-if="isShow == 'true'">
         <scroll-view
             scroll-y
             @scroll="scroll"
@@ -45,6 +46,15 @@
             <h-formlist @closeFormlist="closeFormlist" :formList="formList"></h-formlist>
         </div> -->
     </div>
+    <div class="messageShow" v-if="isShow == 'false'">
+      <p>届时诚邀您参加我们的婚礼,请您告知您参加的消息</p>
+      <button class="right" @tap="toForm">我要出席</button>
+      <div class="form" v-show="isForm">
+            <h-form @closeForm="closeForm" @getFromlist="getFromlist"></h-form>
+        </div>
+    </div>
+</div>
+   
 </template>
 
 <script>
@@ -70,7 +80,8 @@ export default {
       isVideo: false,
       isFormlist: false,
       formList: [],
-      showUser: ''
+      showUser: '',
+      isShow: ''
     }
   },
   onShow () {
@@ -86,9 +97,21 @@ export default {
     that.isForm = false
     that.isFormlist = false
     that.getMessageList()
+    that.getShare()
   },
 
   methods: {
+    getShare () {
+      const that = this
+      wx.cloud.callFunction({
+        name: 'sweetImg',
+        data: {}
+      }).then(res => {
+        that.isShow = res.result[0].fileID
+        // console.log(this.isShow)
+      })
+    },
+
     toMessage (e) {
       const that = this
       if (e.target.errMsg === 'getUserInfo:ok') {
@@ -205,7 +228,7 @@ export default {
           user: that.userInfo
         }
       }).then(res => {
-        console.log(res)
+        // console.log(res)
       })
     },
 
@@ -412,4 +435,11 @@ export default {
         z-index 99
     .form-list
         background rgba(0, 0, 0, 0.5)
+.messageShow
+  padding 100px 0
+  p
+    font-size 14px
+    margin 0 30px 20px 30px
+
+
 </style>

@@ -13,7 +13,8 @@
         <p class="count">已收到{{userList.length}}位好友送来的祝福</p>
         <div class="bottom">
             <button class="left" lang="zh_CN" open-type="getUserInfo" @getuserinfo="sendGreet">送上祝福</button>
-            <button class="right" open-type="share">分享喜悦</button> 
+            <button class="right" v-if="isShow == 'true'" open-type="share">分享喜悦</button>
+            <button class="right" v-if="isShow == 'false'">送过祝福</button> 
         </div>
     </div>
 </template>
@@ -26,12 +27,14 @@ export default {
     return {
       userList: [],
       openId: '',
-      userInfo: ''
+      userInfo: '',
+      isShow: ''
     }
   },
   onShow () {
     const that = this
     that.getUserList()
+    that.getShare()
   },
   methods: {
     sendGreet (e) {
@@ -91,8 +94,19 @@ export default {
         name: 'userList',
         data: {}
       }).then(res => {
-        console.log(res)
+        // console.log(res)
         that.userList = res.result.data.reverse()
+      })
+    },
+
+    getShare () {
+      const that = this
+      wx.cloud.callFunction({
+        name: 'sweetImg',
+        data: {}
+      }).then(res => {
+        that.isShow = res.result[0].fileID
+        // console.log(this.isShow)
       })
     }
   }

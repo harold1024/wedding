@@ -21,6 +21,7 @@
                 <p>农历 五月廿八 中午十一时零八分钟 举办婚礼</p>
                 <p>席设：福临门大酒店</p>
                 <p>地址：沈阳市沈北新区道义南大街28-4号</p>
+                <p>（地铁2号线航空航天大学站A口）</p>
                 <image src="../../static/images/we.png" class="img_footer"/>
             </div>
         </div>
@@ -38,20 +39,13 @@ export default {
   data () {
     return {
       isPlay: false,
-      list: [],
-      audioCtx: ''
+      list: []
+      // audioCtx: null
     }
   },
   onShow () {
     const that = this
-    if (!that.isPlay) {
-      that.audioCtx = wx.createInnerAudioContext()
-      this.audioCtx.autoplay = true
-      this.audioCtx.loop = true
-      this.audioCtx.src = 'cloud://test-bhtyu.7465-test-bhtyu-1300389118/music/loveYou.mp3'
-      that.isPlay = true
-      // that.getList()
-    }
+    that.musicPlay()
   },
   methods: {
     audioPlay () {
@@ -65,8 +59,21 @@ export default {
         that.isPlay = true
         tools.showToast('背景音乐已开启~')
       }
-    }
+    },
 
+    musicPlay () {
+      const that = this
+      if (!that.isPlay) {
+        // console.log(wx.createInnerAudioContext())
+        const audioCtx = wx.createInnerAudioContext()
+        audioCtx.autoplay = true
+        audioCtx.loop = true
+        audioCtx.src = 'http://cdn.wenlong.ink/marry/music/loveYou.mp3'
+        that.audioCtx = audioCtx
+        that.isPlay = true
+        // that.getList()
+      }
+    }
     // getList () {
     //   const that = this
     //   wx.cloud.callFunction({
@@ -77,16 +84,6 @@ export default {
     //     that.list = res.result[0]
     //   })
     // },
-
-    // getListaaa () {
-    //   const that = this
-    //   const db = wx.cloud.database()
-    //   const banner = db.collection('banner')
-    //   banner.get().then(res => {
-    //     console.log(res.data)
-    //     that.list = res.data[0].bannerList
-    //   })
-    // }
   },
 
   onShareAppMessage: function (res) {
@@ -132,7 +129,7 @@ export default {
     height 100%
     .indexImg
       position absolute
-      width 100%
+      width 120%
       height 100%
       object-fit:cover;
   .inv
